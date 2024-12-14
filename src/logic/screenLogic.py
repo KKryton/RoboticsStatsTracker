@@ -1,29 +1,58 @@
 import tkinter as tk
 
-def initializeLabels(window, textColor, backgroundColor):
-    TextLabels = {}
-    ButtonLabels = {}
+TextLabels = {}
+ButtonLabels = {}
+ImageLabels = {}
 
-    Label1 = tk.Label(window, text = "Stats Tracker", font = ("Arial", 48), fg = textColor, bg = backgroundColor)
-    Label1.place(relx = 0.5, rely = 0.06, anchor = "center")
-    TextLabels['Label1'] = Label1
+def initializeLabels(window, textColor, backgroundColor):
+
+    Text1 = tk.Label(window, text = "Stats Tracker", font = ("Arial", 48), fg = textColor, bg = backgroundColor)
+    Text1.place(relx = 0.5, rely = 0.06, anchor = "center")
+    TextLabels['Text1'] = Text1
     
     def onImageClick():
         return
 
     imagepath = tk.PhotoImage(file = "src/images/hollinsrobotics.png")
-    ButtonLabel1 = tk.Button(window, image = imagepath, command = onImageClick)
-    ButtonLabel1.image = imagepath
-    ButtonLabel1.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ButtonLabels['ButtonLabel1'] = ButtonLabel1
+    Button1 = tk.Button(window, image = imagepath, command = onImageClick)
+    Button1.image = imagepath
+    Button1.place(relx = 0.5, rely = 0.5, anchor = "center")
+    ButtonLabels['Button1'] = Button1
     
-    return TextLabels and ButtonLabels
+    return TextLabels, ButtonLabels
 
-def updateTextLabel(Labels, LabelID, newText = None, newFont = None, newTextColor = None,
+def updateButtonLabel(LabelID, newText = None, newImagePath = None, newCommand = None,
+                      newRelX = None, newRelY = None, newAnchor = None):
+    
+    if LabelID in ButtonLabels:
+        button = ButtonLabels[LabelID]
+
+    if newText is not None:
+        button.config(text = newText, image = '')
+
+    if newImagePath is not None:
+        newImage = tk.PhotoImage(file = newImagePath)
+        button.config(image = newImage, text = '')
+        button.image = newImage
+    
+    if newCommand is not None:
+        button.config(command = newCommand)
+
+    if newRelX is not None or newRelY is not None or newAnchor is not None:
+            currentPosition = button.place_info()
+            button.place_forget()
+            button.place(
+                relx = newRelX if newRelX is not None else currentPosition.get('relx', 0.5),
+                rely = newRelY if newRelY is not None else currentPosition.get('rely', 0.5),
+                anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
+            )
+    
+            
+def updateTextLabel(LabelID, newText = None, newFont = None, newTextColor = None,
                     newRelX = None, newRelY = None, newAnchor = None):
     
-    if LabelID in Labels:
-        label = Labels[LabelID]
+    if LabelID in TextLabels:
+        label = TextLabels[LabelID]
 
         if newText is not None:
             label.config(text = newText)
@@ -36,10 +65,10 @@ def updateTextLabel(Labels, LabelID, newText = None, newFont = None, newTextColo
 
         if newRelX is not None or newRelY is not None or newAnchor is not None:
 
-            current_position = label.place_info()
+            currentPosition = label.place_info()
             label.place_forget()
             label.place(
-                relx = newRelX if newRelX is not None else current_position.get('relx', 0.5),
-                rely = newRelY if newRelY is not None else current_position.get('rely', 0.5),
-                anchor = newAnchor if newAnchor is not None else current_position.get('anchor', 'center')
+                relx = newRelX if newRelX is not None else currentPosition.get('relx', 0.5),
+                rely = newRelY if newRelY is not None else currentPosition.get('rely', 0.5),
+                anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
             )

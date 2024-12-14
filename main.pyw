@@ -3,7 +3,7 @@ import platform # Data retriever for the sole purpose of allowing the icon to be
 import ctypes # Library to manipulate C data types so the taskbar icon changes accordingly.
 import os # OS library for file path error workarounds.
 
-from src.logic.screenLogic import initializeLabels, updateTextLabel # Import logic from other files
+from src.logic.screenLogic import initializeLabels, updateTextLabel, updateButtonLabel # Import logic from other files
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # Makes sure the file directory is correct so assets can be retrieved.

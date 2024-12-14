@@ -7,7 +7,7 @@ The point of this program is to track our game stats; tracking Auto scores, Tele
 track our progression throughout the season to see how we have improved and where else we can improve.
 
 AS OF CURRENTLY, this program is really only meant to be for us but after I refine it and make it look pretty we may send it
-out to other teams for them to take utilize and improve. Not only do we want to improve ourselves, we want to empower
+out to other teams for them to utilize and improve. Not only do we want to improve ourselves, we want to empower
 other teams to reach their potential and make FIRST a better place. With that said, if this program isn't that great, or doesn't
 get finished, I wouldn't want to send out an unfinished project to other teams.
 
