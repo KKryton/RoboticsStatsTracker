@@ -9,17 +9,36 @@ def initializeLabels(window, textColor, backgroundColor):
     Text1 = tk.Label(window, text = "Stats Tracker", font = ("Arial", 48), fg = textColor, bg = backgroundColor)
     Text1.place(relx = 0.5, rely = 0.06, anchor = "center")
     TextLabels['Text1'] = Text1
-    
-    def onImageClick():
-        return
 
     imagepath = tk.PhotoImage(file = "src/images/hollinsrobotics.png")
+    def onImageClick():
+        return
     Button1 = tk.Button(window, image = imagepath, command = onImageClick)
     Button1.image = imagepath
     Button1.place(relx = 0.5, rely = 0.5, anchor = "center")
     ButtonLabels['Button1'] = Button1
     
-    return TextLabels, ButtonLabels
+    return TextLabels, ButtonLabels, ImageLabels
+
+def updateImageLabel(LabelID, newImagePath = None, newRelX = None, newRelY = None, newAnchor = None):
+    
+    if LabelID in ImageLabels:
+        labelImage = ImageLabels[LabelID]
+
+    if newImagePath is not None:
+        newImage = tk.PhotoImage(file = newImagePath)
+        labelImage.config(image = newImagePath)
+        labelImage.image = newImage
+    
+    if newRelX is not None or newRelY is not None or newAnchor is not None:
+            currentPosition = labelImage.place_info()
+            labelImage.place_forget()
+            labelImage.place(
+                relx = newRelX if newRelX is not None else currentPosition.get('relx', 0.5),
+                rely = newRelY if newRelY is not None else currentPosition.get('rely', 0.5),
+                anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
+            )
+        
 
 def updateButtonLabel(LabelID, newText = None, newImagePath = None, newCommand = None,
                       newRelX = None, newRelY = None, newAnchor = None):
