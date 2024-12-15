@@ -18,3 +18,8 @@ What I envision this program becoming:
 - Suggest probabilities for what stats can be achieved and how long it might take.
 - (It's basically a stats calculator in all honesty, we will see where it goes!)
 
+IMPORTANT: If you don't have python installed it won't work. Go to the Microsoft Store app or whatever the
+native store app is for your operating system, then install the latest Python version. I don't know which
+verion in specific is the minimum supported but I would suggest getting the latest one anyways. I am on
+version 3.12.5 but I am aware of a 3.14 release. No external dependencies or packages are needed, this 
+program uses native python libraries to maximize portability.
