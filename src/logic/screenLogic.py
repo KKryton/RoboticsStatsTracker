@@ -175,7 +175,9 @@ def updateTextLabel(LabelID, newText = None, newFont = None, newTextColor = None
                 anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
             )
 
-def initializeTitleScreen():
+# Arranges labels in such a way that sets the title screen
+def setTitleScreen():
+
     updateTextLabel("Text1", newText = "Match Stats Tracker", newFont = ("Arial", 52), 
                     newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
     updateTextLabel("Text2", newText = "Data", newFont = ("Arial", 32), 
@@ -183,10 +185,33 @@ def initializeTitleScreen():
     updateTextLabel("Text3", newText = "Stats", newFont = ("Arial", 32), 
                     newRelX = 0.703, newRelY = 0.25, newAnchor = "center")
     def dataIconClicked():
-        pass
+        setFileScreen()
     updateButtonLabel("Button1", newImagePath = "src/images/dataIcon.png", newCommand = dataIconClicked, 
                       newRelX = 0.2, newRelY = 0.3, newAnchor = "nw")
     def statIconClicked():
         pass
     updateButtonLabel("Button2", newImagePath = "src/images/statsIcon.png", newCommand = statIconClicked, 
                       newRelX = 0.8, newRelY = 0.3, newAnchor = "ne")
+    
+
+def setFileScreen():
+
+    updateTextLabel("Text1", newText = "File Manager", newFont = ("Arial", 52), 
+                    newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
+    updateTextLabel("Text2", newText = "New File", newFont = ("Arial", 32),
+                    newRelX = 0.297, newRelY = 0.25, newAnchor = "center")
+    updateTextLabel("Text3", newText = "Delete File", newFont = ("Arial", 32), 
+                    newRelX = 0.5, newRelY = 0.25, newAnchor = "center")
+    updateTextLabel("Text4", newText = "Add Data", newFont = ("Arial", 32), 
+                    newRelX = 0.703, newRelY = 0.25, newAnchor = "center")
+    def addFileIconClicked():
+        pass
+    updateButtonLabel("Button1", newImagePath = "src/images/addFileIcon.png", newCommand = addFileIconClicked, 
+                      newRelX = 0.2, newRelY = 0.3, newAnchor = "nw")
+    def deleteFileIconClicked():
+        pass
+    updateButtonLabel("Button2", newImagePath = "src/ images/deleteFileIcon.png", newCommand = deleteFileIconClicked, 
+                      newRelX = 0.8, newRelY = 0.3, newAnchor = "ne")
+    def addDataIconClicked():
+        pass
+    updateButtonLabel("Button3", newImagePath="src/images/addDataIcon.png")

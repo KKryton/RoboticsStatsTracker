@@ -3,7 +3,7 @@ import platform # Data retriever for the sole purpose of allowing the icon to be
 import ctypes # Library to manipulate C data types so the taskbar icon changes accordingly.
 import os # OS library for file path error workarounds.
 
-from src.logic.screenLogic import initializeLabels, initializeTitleScreen # Import logic from other files
+from src.logic.screenLogic import initializeLabels, setTitleScreen, setFileScreen # Import logic from other files
 from src.logic.screenLogic import updateTextLabel, updateImageLabel, updateButtonLabel
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +32,8 @@ SYSTEMWINDOW.configure(bg=BackgroundColors[0]) # Sets background color.
 
 Labels = initializeLabels(SYSTEMWINDOW, TextColors[0], BackgroundColors[0])
 
-initializeTitleScreen()
+# Screen manipulation here idk ----------------------------------------
+
+setTitleScreen()
 
 SYSTEMWINDOW.mainloop() # Loop so the program doesn't expire.
