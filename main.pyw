@@ -32,8 +32,6 @@ SYSTEMWINDOW.configure(bg=BackgroundColors[0]) # Sets background color.
 
 Labels = initializeLabels(SYSTEMWINDOW, TextColors[0], BackgroundColors[0])
 
-# Screen manipulation here idk ----------------------------------------
-
 setTitleScreen()
 
 SYSTEMWINDOW.mainloop() # Loop so the program doesn't expire.

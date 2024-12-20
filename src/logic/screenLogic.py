@@ -3,10 +3,9 @@ import tkinter as tk
 TextLabels = {} # Dict to store text labels.
 ButtonLabels = {} # Dict to store buttons.
 ImageLabels = {} # Dict to store image labels.
-Screens = {"TitleScreen"} # Dict to store ScreenIDs.
-CurrentScreen = None
 
-# Empty button click function to be overwritten. 
+# Default button command to satisfy parameter requirements.
+# Button functions will eventually get overwritten by new functions. 
 def onButtonClick():
     return
 
@@ -14,92 +13,50 @@ def initializeLabels(window, textColor, backgroundColor):
 
 # Some of these labels may go unused. They will be invisible(ish) by default in the center of
 # the screen. Labels can be edited individually using their respective updateLabel() functions.
-
+# Originally each label was created individually but I had a HUGE BRAIN IDEA and converted it
+# to while loops to create labels. If more labels are needed, just increase how many loops it does.
+# Not only is it easier to make more labels, its also super efficient because its three while
+# loops and not 200 lines of code!
 
     # --------------- Text Labels ---------------
 
-    Text1 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text1.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text1'] = Text1
+    loopCount = 1
 
-    Text2 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text2.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text2'] = Text2
-
-    Text3 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text3.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text3'] = Text3
-    # All of these text labels appear invisible but can be repurposed.
-    Text4 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text4.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text4'] = Text4
-
-    Text5 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text5.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text5'] = Text5
-
-    Text6 = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
-    Text6.place(relx = 0.5, rely = 0.5, anchor = "center")
-    TextLabels['Text6'] = Text6
-
+    while loopCount < 10:
+        TextID = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
+        TextID.place(relx = 0.5, rely = 0.5, anchor = "center")
+        TextLabels['Text' + str(loopCount)] = TextID
+        loopCount = loopCount + 1
+        if loopCount > 10:
+            break
 
     # --------------- Image Labels ---------------
 
-    imagepath = tk.PhotoImage(file = "")
-    Image1 = tk.Label(window, image = imagepath, borderwidth = 0, bg = backgroundColor)
-    Image1.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ImageLabels['Image1'] = Image1
+    loopCount = 1
 
-    imagepath = tk.PhotoImage(file = "")
-    Image2 = tk.Label(window, image = imagepath, borderwidth = 0, bg = backgroundColor)
-    Image2.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ImageLabels['Image2'] = Image2
-
-    imagepath = tk.PhotoImage(file = "")
-    Image3 = tk.Label(window, image = imagepath, borderwidth = 0, bg = backgroundColor)
-    Image3.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ImageLabels['Image3'] = Image3
-
-    imagepath = tk.PhotoImage(file = "")
-    Image4 = tk.Label(window, image = imagepath, borderwidth = 0, bg = backgroundColor)
-    Image4.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ImageLabels['Image4'] = Image4
-
+    while loopCount < 5:
+        imagepath = tk.PhotoImage(file = "")
+        ImageID = tk.Label(window, image = imagepath, borderwidth = 0, bg = backgroundColor)
+        ImageID.place(relx = 0.5, rely = 0.5, anchor = "center")
+        ImageLabels['Image' + str(loopCount)] = ImageID
+        loopCount = loopCount + 1
+        if loopCount > 5:
+            break
 
     # --------------- Buttons ---------------
 
-    def onButtonClick():
-        return # Overwritten function on a per-button basis.
-    imagepath = tk.PhotoImage(file = "")
-    Button1 = tk.Button(window, image = imagepath, command = onButtonClick, borderwidth = 0, bg = backgroundColor)
-    Button1.image = imagepath
-    Button1.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ButtonLabels['Button1'] = Button1
+    loopCount = 1
 
-    def onButtonClick():
-        return
-    imagepath = tk.PhotoImage(file = "")
-    Button2 = tk.Button(window, image = imagepath, command = onButtonClick, borderwidth = 0, bg = backgroundColor)
-    Button2.image = imagepath
-    Button2.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ButtonLabels['Button2'] = Button2
+    while loopCount < 15:
+        imagepath = tk.PhotoImage(file = "")
+        ButtonID = tk.Button(window, image = imagepath, command = onButtonClick, borderwidth = 0, bg = backgroundColor)
+        ButtonID.image = imagepath
+        ButtonID.place(relx = 0.5, rely = 0.5, anchor = "center")
+        ButtonLabels['Button' + str(loopCount)] = ButtonID
+        loopCount = loopCount + 1
+        if loopCount > 15:
+            break
 
-    def onButtonClick():
-        return
-    imagepath = tk.PhotoImage(file = "")
-    Button3 = tk.Button(window, image = imagepath, command = onButtonClick, borderwidth = 0, bg = backgroundColor)
-    Button3.image = imagepath
-    Button3.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ButtonLabels['Button3'] = Button3
-
-    def onButtonClick():
-        return
-    imagepath = tk.PhotoImage(file = "")
-    Button4 = tk.Button(window, image = imagepath, command = onButtonClick, borderwidth = 0, bg = backgroundColor)
-    Button4.image = imagepath
-    Button4.place(relx = 0.5, rely = 0.5, anchor = "center")
-    ButtonLabels['Button4'] = Button4
-    
     return TextLabels, ButtonLabels, ImageLabels
 
 
@@ -207,11 +164,12 @@ def setFileScreen():
     def addFileIconClicked():
         pass
     updateButtonLabel("Button1", newImagePath = "src/images/addFileIcon.png", newCommand = addFileIconClicked, 
-                      newRelX = 0.2, newRelY = 0.3, newAnchor = "nw")
+                      newRelX = 0.297, newRelY = 0.5, newAnchor = "center")
     def deleteFileIconClicked():
         pass
-    updateButtonLabel("Button2", newImagePath = "src/ images/deleteFileIcon.png", newCommand = deleteFileIconClicked, 
-                      newRelX = 0.8, newRelY = 0.3, newAnchor = "ne")
+    updateButtonLabel("Button2", newImagePath = "src/images/deleteFileIcon.png", newCommand = deleteFileIconClicked, 
+                      newRelX = 0.5, newRelY = 0.5, newAnchor = "center")
     def addDataIconClicked():
         pass
-    updateButtonLabel("Button3", newImagePath="src/images/addDataIcon.png")
+    updateButtonLabel("Button3", newImagePath="src/images/addDataIcon.png", newCommand = addDataIconClicked,
+                      newRelX = 0.703, newRelY = 0.5, newAnchor = "center")
