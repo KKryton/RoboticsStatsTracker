@@ -7,7 +7,7 @@ ImageLabels = {} # Dict to store image labels.
 # Default button command to satisfy parameter requirements.
 # Button functions will eventually get overwritten by new functions. 
 def onButtonClick():
-    return
+    pass
 
 def initializeLabels(window, textColor, backgroundColor):
 
@@ -59,6 +59,23 @@ def initializeLabels(window, textColor, backgroundColor):
 
     return TextLabels, ButtonLabels, ImageLabels
 
+def resetLabels():
+    for TextID in TextLabels:
+        updateTextLabel(TextID, newText = "", 
+                        newRelX = 0.5, newRelY = 0.5, newAnchor = "center")
+    for ImageID in ImageLabels:
+        updateImageLabel(ImageID, newImagePath = "", 
+                         newRelX = 0.5, newRelY = 0.5, newAnchor = "center")
+    for ButtonID in ButtonLabels:
+        updateButtonLabel(ButtonID, newImagePath = "", newCommand = onButtonClick, 
+                          newRelX = 0.5, newRelY = 0.5, newAnchor = "center")
+    return TextLabels, ButtonLabels, ImageLabels
+
+
+# Label update functions simply take parameters given to them then adjust the config for the specific object.
+# For example, updateTextLabel("Text3", newText = "profanity is my fav coding language", newFont = ("Arial", 32))
+# changes Text Box 3 to say "profanity is my fav coding language" with the Arial font at size 32.
+# updateImageLabel("Image1", newImagePath = 'path/to/my/image.png') changes Image 1 to whatever the path goes to.
 
 def updateImageLabel(LabelID, newImagePath = None, newRelX = None, newRelY = None, newAnchor = None):
     
@@ -79,7 +96,6 @@ def updateImageLabel(LabelID, newImagePath = None, newRelX = None, newRelY = Non
                 anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
             )
         
-
 def updateButtonLabel(LabelID, newText = None, newImagePath = None, newCommand = None,
                       newRelX = None, newRelY = None, newAnchor = None):
     
@@ -106,7 +122,6 @@ def updateButtonLabel(LabelID, newText = None, newImagePath = None, newCommand =
                 anchor = newAnchor if newAnchor is not None else currentPosition.get('anchor', 'center')
             )
     
-            
 def updateTextLabel(LabelID, newText = None, newFont = None, newTextColor = None,
                     newRelX = None, newRelY = None, newAnchor = None):
     
@@ -135,6 +150,8 @@ def updateTextLabel(LabelID, newText = None, newFont = None, newTextColor = None
 # Arranges labels in such a way that sets the title screen
 def setTitleScreen():
 
+    resetLabels()
+
     updateTextLabel("Text1", newText = "Match Stats Tracker", newFont = ("Arial", 52), 
                     newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
     updateTextLabel("Text2", newText = "Data", newFont = ("Arial", 32), 
@@ -150,8 +167,10 @@ def setTitleScreen():
     updateButtonLabel("Button2", newImagePath = "src/images/statsIcon.png", newCommand = statIconClicked, 
                       newRelX = 0.8, newRelY = 0.3, newAnchor = "ne")
     
-
+# Arranges labels in such a way that sets the file screen
 def setFileScreen():
+
+    resetLabels()
 
     updateTextLabel("Text1", newText = "File Manager", newFont = ("Arial", 52), 
                     newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
@@ -173,3 +192,5 @@ def setFileScreen():
         pass
     updateButtonLabel("Button3", newImagePath="src/images/addDataIcon.png", newCommand = addDataIconClicked,
                       newRelX = 0.703, newRelY = 0.5, newAnchor = "center")
+    updateButtonLabel("Button4", newImagePath = "src/images/x.png", newCommand = setTitleScreen,
+                      newRelX = 0.95, newRelY = 0.05, newAnchor = "center")
