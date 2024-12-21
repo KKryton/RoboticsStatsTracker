@@ -22,7 +22,7 @@ def initializeLabels(window, textColor, backgroundColor):
 
     loopCount = 1
 
-    while loopCount < 10:
+    while loopCount < 10: # Each iteration of the loop adds another label
         TextID = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
         TextID.place(relx = 0.5, rely = 0.5, anchor = "center")
         TextLabels['Text' + str(loopCount)] = TextID
