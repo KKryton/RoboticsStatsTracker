@@ -1,4 +1,5 @@
 import tkinter as tk
+from src.logic.fileLogic import fetchDataFiles
 
 TextLabels = {} # Dict to store text labels.
 ButtonLabels = {} # Dict to store buttons.
@@ -22,13 +23,11 @@ def initializeLabels(window, textColor, backgroundColor):
 
     loopCount = 1
 
-    while loopCount < 10: # Each iteration of the loop adds another label
+    while loopCount < 15: # Each iteration of the loop adds another label
         TextID = tk.Label(window, text = "", font = ("Arial", 10), fg = textColor, bg = backgroundColor)
         TextID.place(relx = 0.5, rely = 0.5, anchor = "center")
         TextLabels['Text' + str(loopCount)] = TextID
         loopCount = loopCount + 1
-        if loopCount > 10:
-            break
 
     # --------------- Image Labels ---------------
 
@@ -40,8 +39,6 @@ def initializeLabels(window, textColor, backgroundColor):
         ImageID.place(relx = 0.5, rely = 0.5, anchor = "center")
         ImageLabels['Image' + str(loopCount)] = ImageID
         loopCount = loopCount + 1
-        if loopCount > 5:
-            break
 
     # --------------- Buttons ---------------
 
@@ -54,8 +51,6 @@ def initializeLabels(window, textColor, backgroundColor):
         ButtonID.place(relx = 0.5, rely = 0.5, anchor = "center")
         ButtonLabels['Button' + str(loopCount)] = ButtonID
         loopCount = loopCount + 1
-        if loopCount > 15:
-            break
 
     return TextLabels, ButtonLabels, ImageLabels
 
@@ -154,14 +149,18 @@ def setTitleScreen():
 
     updateTextLabel("Text1", newText = "Match Stats Tracker", newFont = ("Arial", 52), 
                     newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
+    
     updateTextLabel("Text2", newText = "Data", newFont = ("Arial", 32), 
                     newRelX = 0.297, newRelY = 0.25, newAnchor = "center")
+    
     updateTextLabel("Text3", newText = "Stats", newFont = ("Arial", 32), 
                     newRelX = 0.703, newRelY = 0.25, newAnchor = "center")
+    
     def dataIconClicked():
         setFileScreen()
     updateButtonLabel("Button1", newImagePath = "src/images/dataIcon.png", newCommand = dataIconClicked, 
                       newRelX = 0.2, newRelY = 0.3, newAnchor = "nw")
+    
     def statIconClicked():
         pass
     updateButtonLabel("Button2", newImagePath = "src/images/statsIcon.png", newCommand = statIconClicked, 
@@ -172,25 +171,20 @@ def setFileScreen():
 
     resetLabels()
 
-    updateTextLabel("Text1", newText = "File Manager", newFont = ("Arial", 52), 
-                    newRelX = 0.5, newRelY = 0.08, newAnchor = "center")
-    updateTextLabel("Text2", newText = "New File", newFont = ("Arial", 32),
-                    newRelX = 0.297, newRelY = 0.25, newAnchor = "center")
-    updateTextLabel("Text3", newText = "Delete File", newFont = ("Arial", 32), 
-                    newRelX = 0.5, newRelY = 0.25, newAnchor = "center")
-    updateTextLabel("Text4", newText = "Add Data", newFont = ("Arial", 32), 
-                    newRelX = 0.703, newRelY = 0.25, newAnchor = "center")
-    def addFileIconClicked():
-        pass
-    updateButtonLabel("Button1", newImagePath = "src/images/addFileIcon.png", newCommand = addFileIconClicked, 
-                      newRelX = 0.297, newRelY = 0.5, newAnchor = "center")
-    def deleteFileIconClicked():
-        pass
-    updateButtonLabel("Button2", newImagePath = "src/images/deleteFileIcon.png", newCommand = deleteFileIconClicked, 
-                      newRelX = 0.5, newRelY = 0.5, newAnchor = "center")
-    def addDataIconClicked():
-        pass
-    updateButtonLabel("Button3", newImagePath="src/images/addDataIcon.png", newCommand = addDataIconClicked,
-                      newRelX = 0.703, newRelY = 0.5, newAnchor = "center")
+    iteration = 1
+    StartingRelY = 0.1
+    RelyScaleFactor = 0.06
+
+    dataFiles = fetchDataFiles()
+
+    updateTextLabel("Text11", newText = "File Manager", newFont = ("Arial", 52), 
+                    newRelX = 0.5, newRelY = 0.06, newAnchor = "center")
+    
+    for file in dataFiles:
+        updateImageLabel("Image" + str(iteration), newImagePath = "src/images/fileIcon.png", 
+                         newRelX = 0.05, newRelY = (StartingRelY + (RelyScaleFactor * iteration)), newAnchor = "center")
+        updateTextLabel("Text" + str(iteration), newText = file, newFont = ("Arial", 20),
+                        newRelX = 0.07, newRelY = (StartingRelY + (RelyScaleFactor * iteration)), newAnchor = "w")
+    
     updateButtonLabel("Button4", newImagePath = "src/images/x.png", newCommand = setTitleScreen,
-                      newRelX = 0.95, newRelY = 0.05, newAnchor = "center")
+                      newRelX = 0.96, newRelY = 0.069, newAnchor = "center")
